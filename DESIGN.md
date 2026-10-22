@@ -147,6 +147,8 @@ Authored typographic artwork carries distinct Gentum, Safe Code and Ticket Repor
 
 Hero entrance motion is a single short opacity and vertical arrival, enabled only when reduced motion is not requested. Reduced motion disables transitions, animations and smooth scrolling.
 
+On viewports at least (1280px) wide, a decorative lavender character rain fills only the outer gutters, leaving (24px) clear beside the centered content. Canvas masks fade the characters at the top, bottom and horizontal edges. This requested fade is an exception to the no-gradient rule for surfaces. A nearby pointer gently brightens and shifts the glyphs without changing the standard cursor or intercepting input. The effect runs at up to (30fps), pauses while the tab is hidden, and is absent on smaller screens and for reduced-motion visitors.
+
 ## Do's and Don'ts
 
 ### Do:
