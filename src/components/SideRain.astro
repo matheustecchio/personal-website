@@ -1,0 +1,85 @@
+<div class="side-rain" aria-hidden="true">
+  <canvas data-side="left"></canvas>
+  <canvas data-side="right"></canvas>
+</div>
+
+<style>
+  .side-rain { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
+  canvas { position: absolute; top: 0; height: 100%; width: max(0px, calc((100vw - 1120px) / 2 - 24px));
+    mask-image: linear-gradient(to bottom, transparent, black 9%, black 70%, transparent), linear-gradient(to right, transparent, black 24%, black 65%, transparent);
+    mask-composite: intersect;
+  }
+  canvas[data-side='left'] { left: 0; }
+  canvas[data-side='right'] { right: 0; }
+  @media (max-width: 1279px), (prefers-reduced-motion: reduce) { .side-rain { display: none; } }
+</style>
+
+<script>
+  const canvases = [...document.querySelectorAll<HTMLCanvasElement>('.side-rain canvas')];
+  const enabled = matchMedia('(min-width: 1280px) and (prefers-reduced-motion: no-preference)');
+  const glyphs = '01{}[]<>/=+;:.*abcdefghijklmnopqrstuvwxyz';
+  const pointer = { x: -1000, y: -1000 };
+  const cell = 20;
+  const fields = canvases.map(canvas => ({ canvas, context: canvas.getContext('2d'), width: 0, height: 0,
+    streams: [] as { x: number; y: number; speed: number; length: number; seed: number }[] }));
+  let frame = 0;
+  let previous = 0;
+
+  function resize() {
+    for (const field of fields) {
+      const rect = field.canvas.getBoundingClientRect();
+      field.width = rect.width;
+      field.height = rect.height;
+      const ratio = Math.min(devicePixelRatio || 1, 2);
+      field.canvas.width = Math.round(rect.width * ratio);
+      field.canvas.height = Math.round(rect.height * ratio);
+      field.context?.setTransform(ratio, 0, 0, ratio, 0, 0);
+      field.streams = Array.from({ length: Math.ceil(rect.width / cell) }, (_, i) => ({
+        x: i * cell + 8, y: Math.random() * (rect.height + 400),
+        speed: 18 + Math.random() * 24, length: 8 + Math.floor(Math.random() * 14), seed: i * 137 + Math.floor(Math.random() * 500),
+      }));
+    }
+  }
+
+  function draw(time: number) {
+    if (!enabled.matches || document.hidden) { frame = 0; return; }
+    if (time - previous < 1000 / 30) { frame = requestAnimationFrame(draw); return; }
+    const elapsed = previous ? Math.min((time - previous) / 1000, .1) : 0;
+    previous = time;
+    for (const field of fields) {
+      const ctx = field.context;
+      if (!ctx || !field.width) continue;
+      ctx.clearRect(0, 0, field.width, field.height);
+      ctx.font = '11px "JetBrains Mono Variable", monospace';
+      const left = field.canvas.getBoundingClientRect().left;
+      for (const stream of field.streams) {
+        stream.y += stream.speed * elapsed;
+        if (stream.y - stream.length * cell > field.height) stream.y = -cell;
+        for (let row = 0; row < stream.length; row++) {
+          const y = stream.y - row * cell;
+          if (y < -cell || y > field.height + cell) continue;
+          const proximity = Math.max(0, 1 - Math.hypot(pointer.x - left - stream.x, pointer.y - y) / 130);
+          const alpha = (1 - row / stream.length) * .27 + proximity * .4;
+          ctx.fillStyle = `rgba(196, 172, 241, ${alpha})`;
+          const index = (stream.seed + row * 17 + Math.floor(time / (proximity > 0 ? 90 : 700))) % glyphs.length;
+          ctx.fillText(glyphs[index], stream.x + proximity * Math.sin(y / 35) * 5, y);
+        }
+      }
+    }
+    frame = requestAnimationFrame(draw);
+  }
+
+  function sync() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    previous = 0;
+    if (enabled.matches && !document.hidden) { resize(); frame = requestAnimationFrame(draw); }
+    else for (const field of fields) field.context?.clearRect(0, 0, field.width, field.height);
+  }
+  window.addEventListener('pointermove', event => { pointer.x = event.clientX; pointer.y = event.clientY; }, { passive: true });
+  document.addEventListener('pointerleave', () => { pointer.x = -1000; pointer.y = -1000; });
+  window.addEventListener('resize', sync, { passive: true });
+  document.addEventListener('visibilitychange', sync);
+  enabled.addEventListener('change', sync);
+  sync();
+</script>

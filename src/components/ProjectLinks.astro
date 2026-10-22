@@ -1,0 +1,10 @@
+---
+import Arrow from './Arrow.astro';
+interface Props { source: string; docs: string; live?: string; liveLabel?: string }
+const { source, docs, live, liveLabel } = Astro.props;
+---
+<div class="project-links">
+  <a href={source} target="_blank" rel="noopener noreferrer">Source <Arrow external /></a>
+  <a href={docs} target="_blank" rel="noopener noreferrer">Docs <Arrow external /></a>
+  {live && <a href={live} target="_blank" rel="noopener noreferrer">{liveLabel} <Arrow external /></a>}
+</div>

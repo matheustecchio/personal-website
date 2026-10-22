@@ -1,0 +1,51 @@
+---
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import Arrow from '../components/Arrow.astro';
+import SideRain from '../components/SideRain.astro';
+interface Props { title?: string; description?: string }
+const { title = 'Matheus Tecchio · Software Developer', description = 'Matheus Tecchio builds practical software, from personal finance to developer tools. Explore projects, source code and documentation.' } = Astro.props;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#101013" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <SideRain />
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header container">
+      <a class="wordmark" href="/" aria-label="Matheus Tecchio, home">matheus<span>.</span>tecchio<span class="wordmark-cursor">_</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+        <a href="/projects/" aria-current={path.startsWith('/projects') ? 'page' : undefined}>Projects</a>
+        <a href="/#about">About</a>
+        <a class="nav-contact" href="https://github.com/matheustecchio" target="_blank" rel="noopener noreferrer">GitHub <Arrow external /></a>
+      </nav>
+      <details class="mobile-nav">
+        <summary>Menu <span class="menu-symbol" aria-hidden="true">+</span></summary>
+        <nav aria-label="Mobile navigation">
+          <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+          <a href="/projects/" aria-current={path.startsWith('/projects') ? 'page' : undefined}>Projects</a>
+          <a href="/#about">About</a>
+          <a href="https://github.com/matheustecchio" target="_blank" rel="noopener noreferrer">GitHub <Arrow external /></a>
+        </nav>
+      </details>
+    </header>
+    <main id="main-content" class="container"><slot /></main>
+    <footer class="container site-footer">
+      <div><a class="wordmark" href="/">matheus<span>.</span>tecchio</a><p>Practical software. Thoughtfully built.</p></div>
+      <nav aria-label="Footer navigation"><a href="/projects/">Projects</a><a href="/#about">About</a><a href="https://github.com/matheustecchio" target="_blank" rel="noopener noreferrer">GitHub <Arrow external /></a></nav>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} Matheus Tecchio</span><a href="https://github.com/matheustecchio/personal-website" target="_blank" rel="noopener noreferrer">View this site's source <Arrow external /></a></div>
+    </footer>
+  </body>
+</html>

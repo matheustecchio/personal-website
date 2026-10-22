@@ -1,0 +1,19 @@
+---
+interface Props { kind: string; small?: boolean }
+const { kind, small = false } = Astro.props;
+---
+<div class:list={['project-cover', kind, { small }]} aria-hidden="true">
+  {kind === 'gentum-finance' ? <>
+    <span class="cover-label">LOCAL PERSONAL FINANCE</span>
+    <div class="gentum-word">gentum<span>_</span></div>
+    <div class="cover-bottom"><span>Accounts. Budgets. Clarity.</span><span class="cover-mark">g.</span></div>
+  </> : kind === 'safe-code' ? <>
+    <span class="cover-label">A LITTLE LESS EXPOSURE.</span>
+    <div class="safe-word"><span class="bracket">[</span> safe<span class="safe-break">code<span class="bracket"> ]</span></span></div>
+    <div class="cover-bottom"><span>Keep secrets out of source.</span><span class="cover-mark">*</span></div>
+  </> : <>
+    <span class="cover-label">ONE LESS REPETITIVE TASK.</span>
+    <div class="report-word">.xlsx<br /><span>to .pdf</span></div>
+    <div class="cover-bottom"><span>Ticket Report Generator</span><span class="cover-mark">/</span></div>
+  </>}
+</div>

@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Arrow from '../components/Arrow.astro';
+import ProjectCover from '../components/ProjectCover.astro';
+import ProjectLinks from '../components/ProjectLinks.astro';
+import { projects } from '../data/projects';
+---
+<Layout>
+  <section class="hero">
+    <div class="hero-intro">
+      <h1>Small details.<br />Real problems.<br /><span>Useful software.</span></h1>
+      <p>I'm Matheus, a software developer building practical tools. From keeping finances local to catching secrets in your editor, I like making everyday work a little better.</p>
+      <div class="hero-links"><a class="button" href="/projects/">Explore my work <Arrow /></a><a class="text-link" href="https://github.com/matheustecchio" target="_blank" rel="noopener noreferrer">GitHub <Arrow external /></a></div>
+    </div>
+    <aside class="source-note" aria-label="An example from Safe Code">
+      <div class="source-note-header"><span>safe-code</span><span>TypeScript</span></div>
+      <pre><code><span class="code-muted">// A small change. A safer default.</span>
+<span class="code-purple">const</span> clientSecret =
+  <span class="code-string">"demo-credential-987654"</span>;
+
+<span class="code-muted">// Move value to .env</span>
+<span class="code-purple">const</span> clientSecret =
+  process.env.CLIENT_SECRET;</code></pre>
+      <a href="/projects/#safe-code">A look at Safe Code <Arrow /></a>
+    </aside>
+  </section>
+
+  <section class="selected-work" aria-labelledby="selected-title">
+    <div class="section-heading"><h2 id="selected-title">Selected work<span>.</span></h2><a class="text-link" href="/projects/">All projects <Arrow /></a></div>
+    <div class="featured-grid">
+      {projects.slice(0, 2).map(project => <article class="featured-project">
+        <a class="cover-link" href={`/projects/#${project.slug}`} aria-label={`Explore ${project.name}`}><ProjectCover kind={project.slug} small /></a>
+        <div class="project-heading"><h3><a href={`/projects/#${project.slug}`}>{project.name}</a></h3><span class="year">{project.year}</span></div>
+        <p>{project.summary}</p>
+        <ProjectLinks {...project} />
+      </article>)}
+    </div>
+    <a class="additional-project" href="/projects/#ticket-report-generator"><span><span class="minor-label">Also built</span>Ticket Report Generator</span><span class="additional-description">Excel templates to PDF reports <Arrow /></span></a>
+  </section>
+
+  <section id="about" class="about-section" aria-labelledby="about-title">
+    <h2 id="about-title">A little about<br /><span>how I work.</span></h2>
+    <div><p>I like software with a clear purpose: a tool that catches a mistake, removes a repetitive task, or makes information easier to understand.</p><p>My projects span TypeScript, Java and Python. I care about the details around the code, too: useful documentation, automated checks, and a straightforward way to get started.</p><a class="text-link" href="https://github.com/matheustecchio?tab=repositories" target="_blank" rel="noopener noreferrer">Explore my repositories <Arrow external /></a></div>
+  </section>
+
+  <section class="closing"><h2>See what I'm<br /><span>working on.</span></h2><div><p>Projects, experiments, and the code behind them.</p><a class="button" href="https://github.com/matheustecchio" target="_blank" rel="noopener noreferrer">Find me on GitHub <Arrow external /></a></div></section>
+</Layout>
