@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T21:03:08.811983+00:00",
+  "title": "Design System: Matheus Tecchio",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Charcoal canvas"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Violet charcoal"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Warm white"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Soft gray violet"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Lavender ink"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Dark seam"
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "hero-arrive",
+        "value": "arrive .6s cubic-bezier(.16, 1, .3, 1) both",
+        "purpose": "Hero opacity .65 to 1 and translateY 12px to 0, only without reduced motion."
+      },
+      {
+        "name": "button-transition",
+        "value": "background .2s, border-color .2s",
+        "purpose": "Primary anchor hover."
+      },
+      {
+        "name": "cover-transition",
+        "value": "border-color .25s",
+        "purpose": "Linked project cover hover."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary link-button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Compact primary anchor with an arrow.",
+      "html": "<a class=\"ds-button\" href=\"#work\">Explore my work <span aria-hidden=\"true\">\u2192</span></a>",
+      "css": ".ds-button {font-family:var(--font);display:inline-flex;align-items:center;gap:18px;font-size:12px;background:#292136;border:1px solid #59456e;border-radius:5px;padding:13px 18px;color:#e1d1fb;text-decoration:none;transition:background .2s,border-color .2s}.ds-button:hover{background:#362946;border-color:var(--accent);color:var(--text)}.ds-button:active{transform:scale(.98)}.ds-button:focus-visible { outline:2px solid var(--accent); outline-offset:6px; border-radius:2px; }"
+    },
+    {
+      "name": "Technology tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Static outlined technology metadata.",
+      "html": "<span class=\"ds-tag\">TypeScript</span>",
+      "css": ".ds-tag{font-family:var(--font);display:inline-block;border:1px solid var(--border);border-radius:3px;padding:3px 8px;font-size:9px;color:#b5adbf}"
+    },
+    {
+      "name": "Project status",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Static status metadata with violet fill.",
+      "html": "<span class=\"ds-status\">Early MVP</span>",
+      "css": ".ds-status{font-family:var(--font);display:inline-block;font-size:10px;color:var(--accent);background:#251e30;border-radius:3px;padding:3px 8px}"
+    },
+    {
+      "name": "Desktop navigation",
+      "kind": "nav",
+      "description": "Quiet route links with a current-page dot.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#home\" aria-current=\"page\">Home</a><a href=\"#projects\">Projects</a><a href=\"#about\">About</a></nav>",
+      "css": ".ds-nav{font-family:var(--font);display:flex;gap:32px;font-size:12px;color:var(--muted)}.ds-nav a{display:inline-flex;gap:8px;align-items:center;color:inherit;text-decoration:none}.ds-nav a:hover{color:var(--accent)}.ds-nav [aria-current]{color:var(--text)}.ds-nav [aria-current]::after{content:\"\";width:4px;height:4px;background:var(--accent);border-radius:50%}.ds-nav a:focus-visible { outline:2px solid var(--accent); outline-offset:6px; border-radius:2px; }"
+    },
+    {
+      "name": "Source excerpt",
+      "kind": "card",
+      "refersTo": "source-note",
+      "description": "Bordered code evidence with a footer anchor.",
+      "html": "<aside class=\"ds-note\"><header>safe-code <span>TypeScript</span></header><pre><code>const clientSecret =\n  process.env.CLIENT_SECRET;</code></pre><a href=\"#safe-code\">A look at Safe Code <span aria-hidden=\"true\">\u2192</span></a></aside>",
+      "css": ".ds-note{font-family:var(--font);border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}.ds-note header{display:flex;justify-content:space-between;font-size:10px;padding:14px 20px;border-bottom:1px solid var(--border)}.ds-note header span{color:var(--muted)}.ds-note pre{font-family:inherit;font-size:11px;line-height:2;padding:24px 20px 30px;overflow-x:auto;margin:0}.ds-note code{font-family:inherit}.ds-note a{border-top:1px solid var(--border);display:flex;justify-content:space-between;padding:13px 20px;font-size:10px;color:var(--muted);text-decoration:none}.ds-note a:hover{color:var(--accent)}.ds-note a:focus-visible { outline:2px solid var(--accent); outline-offset:6px; border-radius:2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Restrained developer portfolio",
+    "overview": "A restrained developer portfolio with a dark canvas, lavender accents and JetBrains Mono throughout. The user-selected Sunny Patel reference informs the quiet navigation and generous separation; typography, real code and project evidence carry the personality.",
+    "keyCharacteristics": [
+      "Monospace typography at every scale.",
+      "Flat charcoal surfaces with fine borders.",
+      "Lavender emphasis and native links.",
+      "Authored typographic project covers."
+    ],
+    "rules": [],
+    "dos": [
+      "Do retain JetBrains Mono and the standard cursor.",
+      "Do use lavender for meaningful emphasis and interactive links.",
+      "Do keep keyboard focus visible and respect reduced motion.",
+      "Do preserve the distinct editorial project covers."
+    ],
+    "donts": [
+      "Don't introduce gradients, glow or decorative shadows.",
+      "Don't turn project covers into invented product screenshots.",
+      "Don't replace the selected visual world with a new identity."
+    ]
+  }
+}

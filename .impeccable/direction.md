@@ -6,7 +6,7 @@ Mode: Experience. Visitors browse concise selected work on / and inspect longer 
 
 First viewport: Matheus's name in a small navigation, a large left-aligned JetBrains Mono introduction with lavender emphasis, direct work and GitHub links, and a quiet source excerpt from his real project. Let typography and project evidence lead. No custom cursor, gradients, glow, or invented metrics.
 
-Signature interaction: native project links and a compact mobile navigation that opens in document flow. A single short entrance sequence introduces the hero; all content remains visible without scripts or motion.
+Signature interaction: native project links and a compact native mobile navigation that opens as an anchored dropdown overlay. A single short entrance sequence introduces the hero; all content remains visible without scripts or motion.
 
 Use charcoal canvas, warm-white text, lavender interactive ink, violet-tinted surfaces, fine dark borders, and wide space between content groups. Home shows two featured projects with distinct authored typographic covers, and an additional project row. Projects expands each entry, with Source and Docs links immediately visible. Covers are editorial artwork, not screenshots or product mockups. Safe Code also includes its actual public demonstration.
 
