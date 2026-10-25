@@ -1,9 +1,14 @@
 ---
 interface Props { kind: string; small?: boolean }
 const { kind, small = false } = Astro.props;
+const projectImage = kind === 'gentum-finance'
+  ? { src: '/images/gentum-finance-project.png', width: 1598, height: 1013 }
+  : kind === 'safe-code'
+    ? { src: '/images/safe-code-project.png', width: 1200, height: 800 }
+    : undefined;
 ---
-<div class:list={['project-cover', kind, { small }]} aria-hidden="true">
-  {kind === 'gentum-finance' ? <>
+<div class:list={['project-cover', kind, { small, 'has-image': projectImage }]} aria-hidden="true">
+  {projectImage ? <img src={projectImage.src} alt="" width={projectImage.width} height={projectImage.height} loading={small ? 'eager' : 'lazy'} /> : kind === 'gentum-finance' ? <>
     <span class="cover-label">LOCAL PERSONAL FINANCE</span>
     <div class="gentum-word">gentum<span>_</span></div>
     <div class="cover-bottom"><span>Accounts. Budgets. Clarity.</span><span class="cover-mark">g.</span></div>
